@@ -1,0 +1,266 @@
+Author:
+ __      _______ ______ _____  _    _  _____ 
+ \ \    / /_   _|  ____|  __ \| |  | |/ ____|
+  \ \  / /  | | | |__  | |__) | |  | | (___  
+   \ \/ /   | | |  __| |  _  /| |  | |\___ \ 
+    \  /   _| |_| |____| | \ \| |__| |____) |
+     \/   |_____|______|_|  \_\\____/|_____/ 
+     V      I      E      R      U      S                                                                                                                                                
+Created Date:4/28/2024
+Finish  Date:-/-/2024
+Description: Password Manager program, is a Python-based desktop application built using the Tkinter library. It serves as a secure and convenient way to store and manage passwords for various accounts and services for various websites and applications.
+--------------------------------------------------------------------------------
+**Function Documation is here, not in code.**
+accName - can be for people to sort through their other accounts on the same site/application. Other accounts such as "Personal", "My Business", etc. Default name is "Account "
+ErrorMissingInfo - is none, as of start, no error have occured
+selEdit_index - is none as no account is selected to be edited at this moment. Once do the selEdit_index will have an index connected to it to select the right data of the account
+tab_accounts - is an empty list at first but will remember the tab accounts name under the right tab, 
+tabs - an empty set to keep track of the tabs you have
+accountCounter - is set to 0, but will count how many accounts you submitted
+hidePasswordInt - is set to 0 by default and will change between 0=show, and 1=hide password
+nextTabCounter - is set to 0, but will count how many tabs you created
+timestamp - is calling datetime at that moment, USA format:  %months %days %Year %Hours:%Minutes:%Seconds
+def focusIn()
+    This function is so when you click on an entry the font and possible symbols change
+        In event of a widget where the user is specially over that exact entry the color and text will change,
+        call on the entrys, entrys get is "Pre-text" then delete text from start to end, and config so the font is black, password config should be show="*"
+
+def focusOut()
+    This function is when you arent clicked on the entries the font is grey and possible shown as *
+        In event of a widget where the user is not over that exact entry the color and text will change,
+        call on the entrys, entrys get is "" then insert text, and config so the font is grey, password config should be show=" "
+
+def searchTab()
+    This function is to search for a specific Tab over the homepage 
+        query is equal to the get search entry
+        all Example Suggestions are forgot by grids
+        if query and query != pre-text then matchTabs title for title in tabs.keys() if the query is lowercase in title also lowercase, matchTabs is equal to the top 3 searches
+        for i, in title in enumerate with matchTabs, if i==0, all example sugguestions configure and gridded
+
+def nextTabs()
+    This function is to move to the next tab on the right
+        pulls nextTabCounter
+        total amount of tabs equals notebook index end
+        if total amount of tabs is greater than 1 then nextTabCounter is equal to nextTabCounter plus 1 % total amount of tabs, notebook selects nextTabCounter
+        else nextTab configures the button to be disable
+
+def prevTabs()
+    This function is to move to the prev tab on the left
+        pulls nextTabCounter
+        total amount of tabs equals notebook index end
+        if total amount of tabs is greater than 1 then nextTabCounter is equal to nextTabCounter minus 1 % total amount of tabs, notebook selects nextTabCounter
+        else prevTab configures the button to be disable
+
+def create_new_tab()
+    This function calls on others within it as shown below. After the calls we get what the accounts needs
+    Main Account Creation
+    if the length of tabs is equal to the max amount of tabs, if so the create new tab is disabled, and a label tells you, you reached the amount of tabs
+    Else, if the tab title does not have a title an askstring will ask for a title
+        if the tab does have a title then
+            if tab title in tabs is equal to the same name in the array then an error box will appear and let you know an tab already exist, then returns
+         a new account set up frame has been created with frame notebook, such as account name, email/password/username stringvar along with entry boxes and binds with focus-in and focus-out
+         Submit button goes to enterAccount(), new Submissions goes to clearAccount(), delete tabs goes to deleteTab() with tab title, delete accounts goes to deleteAccount(), show password goes to unhiddenPass(), account name goes to editAccountName()
+         new tab to notebook with title, notebook adds new tab and tab title
+         Updates tab dictionary and sorts them alphabetical order by getting the item and sort x:x[0]
+    PRINTS
+    "YOU CAN NOT MAKE ANY MORE ACCOUNTS"
+    "New Tab: '{tab_title}', has been created"
+
+def clearAccount()
+    global calls on edited account index
+    email/password/username stringvar gets set to the pretext
+    sumbit button gets configured to enterAccount() with the edit index to none
+    edit account index is none
+    delete account is removed from grid, its only available when you edit account
+    PRINTS
+    "Clears:: submission > new submission\n"
+
+def deleteTab()
+    calls on tab title in the function
+    global calls in timestamp
+    response to a message box that confirms if the user wants to remove the tab as it will also delete all accounts
+    if the response is yes to remove then
+        notebook will forget tabs of tab title
+        del tab of tab title, del tab accounts in tab title
+    else it will pass
+    PRINTS
+    "Deletion:: Tab: '{tab title}' at '{timestamp}'"
+
+def deleteAccount()
+    global edit account index, account name, account counter, timestamp
+    account is equal to the tab accounts from the tab title
+    if edit account index is not none then
+      set up the label frame with frame, set email, set password, set username, edit button is equal to accounts to pop the selected editted account index
+      frame is then also forgotten by the grid and is destroyed
+      The rest of the accounts will remain after Deletion
+      for i in range of the edit account index and the length of the accounts
+        frame, set email, set password, set username, edit button is equal to account[i]
+        the accounts grid moves spots to the left once an account is deleted, accounts after deleted account moves left
+        account counter is - 1, edit account index is none, delete account is removed from grid, the submit button is config for enterAccount() with edit index is none
+        clearAccount() is called at the end, ready for new account
+    PRINTS
+    "Deletion:: Account: 'account name' - '{timestamp}'"
+
+def editAccount()
+    This function calls on accountName, emailName, passwordName, userName and the index
+    global calls on edit account index
+    account name is configed with the text of the accountName
+    Emailname/Password/username entry boxes are deleted from the beginning to end and inserted from 0 to emailName/passwordName/userName
+    submit config with enterAccount() that calls on edit index equal to index
+    edit account index = index
+    delete account is on the grid
+    PRINTS
+    "Edit Account:: Account: '{accountName}' - Email: {emailName}, Password: {passwordName}, Username: {userName}, Index: {index}\n"
+
+def editAccountName()
+    global account name
+    a new account name askstring will ask for the new accounts name
+    if new account name then
+     account name equals new accountName
+     accountname is configed so text is equal to account name
+     if edit account index is not none then
+       accounts is equal to tab account[tab_title]
+       frame, set email, set password, set username, edit button is equal to account[edit account index]
+       frame configed with text is equal to account name
+    PRINTS
+    "Edit Title:: Account: '{accName}' >> Account: '{new_accountName}'"
+
+def enterAccount()
+    This function calls on edit index but preset to equal none
+    global account name, error missing information, account counter, edit account index
+    emailName/passwordName/userName is equal to their stringvar to get and replace with pretext
+    if error missing information
+      Error Missing Information grid is forgotten
+      Error Missing Information is equal to none
+    if emailName or passwordName is equal to ""
+      if Error Missing Information is none then
+        Error Missing Information label is connected to the new tab with the text of error and font is equal to ready
+        Error Missing Information placed on grid
+        Error Missing Information is equal to none
+    elif needs to have an @ and ends with .com/.net/ etc to emailName then
+      if Error Missing Information is none then
+        Error Missing Information label is connected to the new tab with the text of error and font is equal to ready
+        Error Missing Information placed on grid
+    else
+      passwordNameMask is equal to stars times length of passwordName to mask the password
+      accounts is equal to tab account[tab title]
+      if edit index is not none
+        frame, set email, set password, set username, edit account button is equal to account[edit index]
+        set email/password/user to configed to text equal to pretext + emailName/passwordNameMask/userName
+        edit account button configed to editAccount calling on a=account name, e=emailName, p=passwordName, u=userName, i=edit index
+      else you will set the label frame for accounts
+        set the account of label frame, using the column equal to the length of account
+        set email label, password label, username label, edit account
+        accounts appends set account, set email, set password, set username, edit account button 
+        account counter + 1
+      email/password/username is set to pretext
+      account name is equal to "Account" plus string of length of tab accounts[tab title]
+      account name is configed to text equal to acccount name
+      delete account is removed from grid
+      edit account index is equal to none
+      clearAccount()
+    PRINTS
+    "FAILED Create:: ABOVE"
+    "Create:: Tab: '{tab_title}', Account: '{accName}' - Email: {emailName}, Password: {passwordName}"
+
+def focusIn()
+    widget is equal to event widget
+    if widget is equal to Emailname entry and email stringvar.get is equal to pretext
+    email StringVar is set to ""
+    Emailname entry is configed and the font is black
+    elif widget is equal to Passwordname entry and password stringvar.get is equal to pretext
+    password StringVar is set to ""
+    Passwordname entry is configed and the font is black
+    elif widget is equal to Username entry and user stringvar.get is equal to pretext
+    username StringVar is set to ""
+    Username is configed and the font is black
+
+def focusOut()
+    widget is equal to event widget
+    if widget is equal to Emailname entry and email stringvar.get is equal to ""
+    email StringVar is set to pretext
+    Emailname entry is configed and the font is grey
+    elif widget is equal to Passwordname entry and password stringvar.get is equal to ""
+    password StringVar is set to pretext
+    Passwordname entry is configed and the font is grey
+    elif widget is equal to Username entry and user stringvar.get is equal to ""
+    username StringVar is set to pretext
+    Username is configed and the font is grey
+
+def unhiddenPass()
+    global hidePasswordInt
+    if hidePasswordInt is equal to 0 then you will unhide the password leaving it in cleartext
+      Passwordname entry is configed to show no stars and font is black, hidePasswordInt is + 1
+    else will hide
+      Passwordname entry configed to show stars (*) and font is black, hidePasswordInt is - 1
+
+Homepage
+    Welcome text (Label)
+    Create New tab (Button)
+    Search Bar > Enter (Entry, Button)
+    3 Search Suggestion (Buttons)
+    Social media Suggestion (LabelFrame, Buttons)
+    Streaming Suggestion (LabelFrame, Buttons)
+    Travel Suggestion (LabelFrame, Buttons)
+    Exit (Button)
+    Prev/Next (Button)
+
+Tabs
+    Account Name (Label)
+    Account Edit Name (Button)
+    Email Box (Entry Box)
+    Password box (Entry Box)
+    Username Box (Entry Box)
+    Error (Label)
+    Hide/Unhide Password (Button)
+    Submit (Button)
+    Add Account (Button)
+    Delete Tab (Button)
+    Delete Account (Button)
+    Accounts (LabelFrame, Labels, Button)
+---------------------------------------------------------------------------------------------------
+**TODOS:**
+Homepage Update >
+    +Add Genre Buttons for Tab Ideas
+    *5/30/2024
+    +No Dulipcates of Tabs
+    *6/20/2024
+    +Search bar + button ">" top 3 results via buttons, use next tab button idea to make it so you zoom to the tab.
+    *5/30/2024
+    +Delete tab button
+    *6/17/2024
+    +Prev/Next bug, press either button before an entry is made
+    *6/3/2024
+    +Exit button
+    *5/31/2024
+
+Entry Submission options >
+    -Show option to cover password with * or show it, default should be *
+    *5/28/2024
+
+Edit account > 
+    -Pull correct accName when editing instead of counting up.
+    *5/27/2024
+    -Make it so you can edit the account if its already been inputted incase you change the Email/Password/Username
+    *5/18/2024
+    -Button to delete account > once LabelFrame is inputted i want to be able to delete it, within the Edit Account
+    *5/19/2024
+
+Submissions >
+    -Make the password hidden once its been entered to the labelframe
+    *5/28/2024
+
+Big Merg >
+    +Add into Tabs
+    *5/30/2024
+    +Add Database
+    *-/-/2024
+--------------------------------------------------------------------------------
+**BUGS:** 
+    + accName and labelframe location does not reset when you go on a new frame
+    Found: 5/31/2024   ||   Fixed: 6/9/2024
+    + pretext "Email: required" found in all entries if you click through the entries without typing anything. Why. > it was the insert, we needed set with using a StringVar
+    Found: 5/31/2024   ||   Fixed: 6/18/2024
+    + accountCounter does not track per tab, just overall accounts
+    Found: 6/9/2024    ||   Fixed: 6/17/2024
+--------------------------------------------------------------------------------
