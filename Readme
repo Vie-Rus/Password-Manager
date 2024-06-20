@@ -10,7 +10,7 @@ Created Date:4/28/2024
 Finish  Date:-/-/2024
 Description: Password Manager program, is a Python-based desktop application built using the Tkinter library. It serves as a secure and convenient way to store and manage passwords for various accounts and services for various websites and applications.
 --------------------------------------------------------------------------------
-**Function Documation is here, not in code.
+#Function Documation is here, not in code.
 accName - can be for people to sort through their other accounts on the same site/application. Other accounts such as "Personal", "My Business", etc. Default name is "Account "
 ErrorMissingInfo - is none, as of start, no error have occured
 selEdit_index - is none as no account is selected to be edited at this moment. Once do the selEdit_index will have an index connected to it to select the right data of the account
