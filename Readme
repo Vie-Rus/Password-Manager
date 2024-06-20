@@ -104,7 +104,7 @@ def deleteAccount()
 def editAccount()
     This function calls on accountName, emailName, passwordName, userName and the index
     global calls on edit account index
-    account name is configed with the text of the accountName
+    account name is configure with the text of the accountName
     Emailname/Password/username entry boxes are deleted from the beginning to end and inserted from 0 to emailName/passwordName/userName
     submit config with enterAccount() that calls on edit index equal to index
     edit account index = index
@@ -117,11 +117,11 @@ def editAccountName()
     a new account name askstring will ask for the new accounts name
     if new account name then
      account name equals new accountName
-     accountname is configed so text is equal to account name
+     accountname is configure so text is equal to account name
      if edit account index is not none then
        accounts is equal to tab account[tab_title]
        frame, set email, set password, set username, edit button is equal to account[edit account index]
-       frame configed with text is equal to account name
+       frame configure with text is equal to account name
     PRINTS
     "Edit Title:: Account: '{accName}' >> Account: '{new_accountName}'"
 
@@ -146,8 +146,8 @@ def enterAccount()
       accounts is equal to tab account[tab title]
       if edit index is not none
         frame, set email, set password, set username, edit account button is equal to account[edit index]
-        set email/password/user to configed to text equal to pretext + emailName/passwordNameMask/userName
-        edit account button configed to editAccount calling on a=account name, e=emailName, p=passwordName, u=userName, i=edit index
+        set email/password/user to configure to text equal to pretext + emailName/passwordNameMask/userName
+        edit account button configure to editAccount calling on a=account name, e=emailName, p=passwordName, u=userName, i=edit index
       else you will set the label frame for accounts
         set the account of label frame, using the column equal to the length of account
         set email label, password label, username label, edit account
@@ -155,7 +155,7 @@ def enterAccount()
         account counter + 1
       email/password/username is set to pretext
       account name is equal to "Account" plus string of length of tab accounts[tab title]
-      account name is configed to text equal to acccount name
+      account name is configure to text equal to acccount name
       delete account is removed from grid
       edit account index is equal to none
       clearAccount()
@@ -167,32 +167,32 @@ def focusIn()
     widget is equal to event widget
     if widget is equal to Emailname entry and email stringvar.get is equal to pretext
     email StringVar is set to ""
-    Emailname entry is configed and the font is black
+    Emailname entry is configure and the font is black
     elif widget is equal to Passwordname entry and password stringvar.get is equal to pretext
     password StringVar is set to ""
-    Passwordname entry is configed and the font is black
+    Passwordname entry is configure and the font is black
     elif widget is equal to Username entry and user stringvar.get is equal to pretext
     username StringVar is set to ""
-    Username is configed and the font is black
+    Username is configure and the font is black
 
 def focusOut()
     widget is equal to event widget
     if widget is equal to Emailname entry and email stringvar.get is equal to ""
     email StringVar is set to pretext
-    Emailname entry is configed and the font is grey
+    Emailname entry is configure and the font is grey
     elif widget is equal to Passwordname entry and password stringvar.get is equal to ""
     password StringVar is set to pretext
-    Passwordname entry is configed and the font is grey
+    Passwordname entry is configure and the font is grey
     elif widget is equal to Username entry and user stringvar.get is equal to ""
     username StringVar is set to pretext
-    Username is configed and the font is grey
+    Username is configure and the font is grey
 
 def unhiddenPass()
     global hidePasswordInt
     if hidePasswordInt is equal to 0 then you will unhide the password leaving it in cleartext
-      Passwordname entry is configed to show no stars and font is black, hidePasswordInt is + 1
+      Passwordname entry is configure to show no stars and font is black, hidePasswordInt is + 1
     else will hide
-      Passwordname entry configed to show stars (*) and font is black, hidePasswordInt is - 1
+      Passwordname entry configure to show stars (*) and font is black, hidePasswordInt is - 1
 
 Homepage
     Welcome text (Label)
